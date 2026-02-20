@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15
+    container_name: repairapp-postgres
+    environment:
+      POSTGRES_DB: repairdb
+      POSTGRES_USER: repairuser
+      POSTGRES_PASSWORD: repairpass
+    ports:
+      - "5433:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: repairapp-backend
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/repairdb
+      SPRING_DATASOURCE_USERNAME: repairuser
+      SPRING_DATASOURCE_PASSWORD: repairpass
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "false"
+    ports:
+      - "8080:8080"
+
+volumes:
+  db_data:
+
+

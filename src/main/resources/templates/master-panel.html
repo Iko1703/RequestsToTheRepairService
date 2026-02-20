@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Панель мастера</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<form th:action="@{/logout}" method="post" style="float: right;">
+    <button type="submit">Выйти</button>
+</form>
+<h1>Панель мастера</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Клиент</th>
+        <th>Телефон</th>
+        <th>Адрес</th>
+        <th>Статус</th>
+        <th>Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="t : ${tickets}">
+        <td th:text="${t.id}"></td>
+        <td th:text="${t.clientName}"></td>
+        <td th:text="${t.phone}"></td>
+        <td th:text="${t.address}"></td>
+        <td th:text="${t.status}"></td>
+        <td>
+            <!-- Позже добавим кнопки take/start/done -->
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
+
+
+
+
